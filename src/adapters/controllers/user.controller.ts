@@ -1,10 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { GetUserUseCase } from '../../use-cases/get-user.usecase';
-import { InMemoryUserRepository } from '../../infrastructure/repositories/in-memory-user.repository';
+import { GetUserUseCasePort } from '../../use-cases/ports/get-user-usecase.port';
+import { Inject } from '@nestjs/common';
 
 @Controller('users')
 export class UserController {
-  private readonly getUserUseCase = new GetUserUseCase(new InMemoryUserRepository());
+  constructor(
+    @Inject('GetUserUseCasePort') private readonly getUserUseCase: GetUserUseCasePort
+  ) {}
 
   @Get(':id')
   async getUser(@Param('id') id: string) {
