@@ -1,6 +1,8 @@
+import { Injectable } from '@nestjs/common';
 import { UserRepositoryPort } from '../../domain/ports/user-repository.port';
 import { User } from '../../domain/entities/user.entity';
 
+@Injectable()
 export class InMemoryUserRepository implements UserRepositoryPort {
   private users = [new User(1, 'Alice'), new User(2, 'Bob')];
 
