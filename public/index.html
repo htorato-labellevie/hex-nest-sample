@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Lookup</title>
+</head>
+<body>
+  <h1>User Lookup</h1>
+  <input id="userId" type="number" placeholder="Enter User ID" />
+  <button onclick="fetchUser()">Get User</button>
+  <p id="result"></p>
+
+  <script>
+    async function fetchUser() {
+      const id = document.getElementById('userId').value;
+      const res = await fetch(`/users/${id}`);
+      const data = await res.json();
+      document.getElementById('result').innerText =
+        data.name ? `Name: ${data.name}` : data.message;
+    }
+  </script>
+</body>
+</html>
